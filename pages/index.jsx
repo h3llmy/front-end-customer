@@ -1,15 +1,17 @@
-import { useRouter } from "next/router";
 import { getLayout } from "../components/layout/layout";
 
 const Home = () => {
-  const router = useRouter();
   return (
-    <div className="" onClick={() => router.push("/test")}>
-      <p>mantap</p>
-      <p>mantap</p>
+    <div className="h-[89vh]">
+      <img
+        className="w-full h-full object-cover"
+        src="https://media.discordapp.net/attachments/789054414853636096/1107152800389025853/image.png?width=832&height=468"
+        alt=""
+      />
     </div>
   );
 };
 
 Home.getLayout = getLayout;
+
 export default Home;

@@ -1,6 +1,10 @@
+import { deleteCookie } from "../../utils/cookie";
 import NavbarMenuButton from "./navbarMenuButton";
 
 const NavbarMenu = ({ menuDisplay }) => {
+  const handdleLogout = () => {
+    deleteCookie("user");
+  };
   return (
     <div
       className={`${
@@ -15,7 +19,11 @@ const NavbarMenu = ({ menuDisplay }) => {
           <NavbarMenuButton href={"/order"} label={"Order"} />
         </li>
         <li>
-          <NavbarMenuButton href={"/"} label={"Sign out"} />
+          <NavbarMenuButton
+            onClick={handdleLogout}
+            href={"/login"}
+            label={"Sign out"}
+          />
         </li>
       </ul>
     </div>

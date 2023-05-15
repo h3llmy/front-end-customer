@@ -1,10 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NavbarButton from "./navbarButton";
 import NavbarLogo from "./navbarLogo";
 import NavbarMenu from "./navbarMenu";
+import { deleteCookie, getLoginCookie } from "../../utils/cookie";
+import { fetchApi } from "../../utils/fetch";
+import Link from "next/link";
 
 const Navbar = () => {
   const [menuDisplay, setMenuDisplay] = useState(false);
+  const [userLogin, setUserLogin] = useState("");
+  const getUserLogin = async () => {
+    const getUserDetail = await fetchApi.get("/user/detail", {
+      headers: {
+        Authorization: `Bearer ${await getLoginCookie("user")}`,
+      },
+    });
+    setUserLogin(getUserDetail.data.data);
+  };
+
+  useEffect(() => {
+    getUserLogin();
+  }, []);
 
   const handdleMenuDisplay = (event) => {
     event.preventDefault();
@@ -13,27 +29,49 @@ const Navbar = () => {
     }, 100);
   };
 
+  const handdleLogout = () => {
+    deleteCookie("user");
+  };
+
   return (
     <>
       <nav className="fixed w-full bg-white border-gray-200 dark:bg-gray-900">
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <div className="w-full flex flex-wrap items-center justify-between mx-auto p-4 px-10">
           <NavbarLogo />
           <div className="flex items-center md:order-2">
+            {userLogin?.username ? (
+              <button
+                className="flex p-1 hidden md:block mr-3 text-md md:mr-0 font-bold dark:text-white"
+                onFocus={handdleMenuDisplay}
+                onClick={handdleMenuDisplay}
+                onBlur={() => {
+                  setTimeout(() => {
+                    setMenuDisplay(false);
+                  }, 100);
+                }}
+              >
+                {userLogin?.username}
+              </button>
+            ) : (
+              <Link href={"/login"}>
+                <button className="flex p-1 font-bold hidden md:block mr-3 text-sm md:mr-0 dark:text-white">
+                  Login
+                </button>
+              </Link>
+            )}
+            {userLogin && (
+              <div className="hidden md:block">
+                <NavbarMenu menuDisplay={menuDisplay} />
+              </div>
+            )}
             <button
-              className="flex p-1 hidden md:block mr-3 text-sm md:mr-0 text-white"
               onFocus={handdleMenuDisplay}
               onClick={handdleMenuDisplay}
-              onBlur={handdleMenuDisplay}
-            >
-              Mina
-            </button>
-            <div className="hidden md:block">
-              <NavbarMenu menuDisplay={menuDisplay} />
-            </div>
-            <button
-              onFocus={handdleMenuDisplay}
-              onClick={handdleMenuDisplay}
-              onBlur={handdleMenuDisplay}
+              onBlur={() => {
+                setTimeout(() => {
+                  setMenuDisplay(false);
+                }, 100);
+              }}
               type="button"
               className="inline-flex items-center p-1 ml-1 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
             >
@@ -57,7 +95,7 @@ const Navbar = () => {
               menuDisplay ? "" : "hidden"
             } w-full md:flex md:w-auto md:order-1`}
           >
-            <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+            <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-16 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
               <li>
                 <NavbarButton href={"/"} name={"Home"} />
               </li>
@@ -70,15 +108,27 @@ const Navbar = () => {
               <li>
                 <NavbarButton href={"/about"} name={"About"} />
               </li>
-              <li className="md:hidden">
-                <NavbarButton href={"/collection"} name={"Collection"} />
-              </li>
-              <li className="md:hidden">
-                <NavbarButton href={"/order"} name={"Order"} />
-              </li>
-              <li className="md:hidden">
-                <NavbarButton href={"/logout"} name={"Sign out"} />
-              </li>
+              {userLogin ? (
+                <div className="md:hidden">
+                  <li>
+                    <NavbarButton href={"/collection"} name={"Collection"} />
+                  </li>
+                  <li>
+                    <NavbarButton href={"/order"} name={"Order"} />
+                  </li>
+                  <li>
+                    <NavbarButton
+                      onClick={handdleLogout}
+                      href={"/login"}
+                      name={"Sign out"}
+                    />
+                  </li>
+                </div>
+              ) : (
+                <div className="md:hidden">
+                  <NavbarButton href={"/login"} name={"Login"} />
+                </div>
+              )}
             </ul>
           </div>
         </div>
