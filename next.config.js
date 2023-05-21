@@ -4,7 +4,7 @@ const nextConfig = {
   swcMinify: true,
   publicRuntimeConfig: {
     BASE_API_URL: process.env.BASE_API_URL,
-    COOKIE_PASSWORD: process.env.COOKIE_PASSWORD,
+    WEB_URL: process.env.WEB_URL,
   },
 };
 

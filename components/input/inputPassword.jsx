@@ -1,3 +1,5 @@
+import React, { useState } from "react";
+
 const InputPassword = ({
   name,
   defaultValue,
@@ -6,8 +8,14 @@ const InputPassword = ({
   autoFocus,
   disable,
 }) => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   const inputProps = {
-    type: "password",
+    type: showPassword ? "text" : "password",
     defaultValue: defaultValue || null,
     onKeyUp: (event) => {
       inputValue(event.target.value);
@@ -29,7 +37,15 @@ const InputPassword = ({
       <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
         {name}
       </label>
-      <input {...inputProps} />
+      <div className="relative">
+        <input {...inputProps} />
+        <a
+          onClick={togglePasswordVisibility}
+          className="absolute top-2 right-3 text-gray-600 dark:text-gray-400 hover:cursor-pointer"
+        >
+          {showPassword ? "Hide" : "Show"}
+        </a>
+      </div>
       {onError && (
         <div className="text-[#FF0000] font-semibold mb-2">{onError}</div>
       )}

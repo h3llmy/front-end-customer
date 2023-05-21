@@ -9,6 +9,13 @@ export default (error, setErrorMessage) => {
     errorMessage = error.message;
   }
 
+  if (
+    typeof errorMessage === "string" &&
+    errorMessage?.split(":")[0] === "TokenExpiredError"
+  ) {
+    errorMessage = "Token Expired";
+  }
+
   setErrorMessage(errorMessage);
   console.error(error);
 };

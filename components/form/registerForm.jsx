@@ -7,10 +7,12 @@ import errorHanddler from "../../utils/errorHanddler";
 import InputText from "../input/inputText";
 import InputPassword from "../input/inputPassword";
 
-const LoginForm = () => {
+const RegisterForm = () => {
   const router = useRouter();
+  const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setComfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   const checkCooie = async () => {
@@ -26,22 +28,33 @@ const LoginForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const [loginToken] = await Promise.all([
-        fetchApi.post("/auth/login", {
+      const [registerToken] = await Promise.all([
+        fetchApi.post("/auth/register", {
+          email,
           username,
           password,
+          confirmPassword,
         }),
       ]);
-      setCookie("user", loginToken.data.data.refreshToken);
-      router.push("/");
+      router.push(`/verification/${registerToken.data.data.token}`);
     } catch (error) {
       errorHanddler(error, setErrorMessage);
     }
   };
   return (
     <form onSubmit={handleSubmit}>
+      <h1 className="text-4xl text-center mb-5 font-semibold">Register</h1>
       <div className="mb-6">
-        <h1 className="text-4xl text-center mb-8 font-semibold">Login</h1>
+        <InputText
+          name={"Email"}
+          inputValue={(value) => {
+            setEmail(value);
+          }}
+          autoFocus
+          onError={errorMessage.email}
+        />
+      </div>
+      <div className="mb-6">
         <InputText
           name={"Username"}
           inputValue={(value) => {
@@ -57,27 +70,36 @@ const LoginForm = () => {
           inputValue={(value) => {
             setPassword(value);
           }}
+          onError={errorMessage.password}
+        />
+      </div>
+      <div className="mb-6">
+        <InputPassword
+          name={"Confirm Password"}
+          inputValue={(value) => {
+            setComfirmPassword(value);
+          }}
           onError={
-            errorMessage.password ||
+            errorMessage.comfirmPassword ||
             (typeof errorMessage == "string" && errorMessage)
           }
         />
       </div>
       <div className="flex justify-between">
-        <Link href={"/forget-password"}>
+        <Link href={"/login"}>
           <a className="font-normal text-base px-5 py-2.5 mr-2 mb-2">
-            <u className="text-blue-500">forget your password?</u>
+            <u className="text-blue-500">Already have an account?</u>
           </a>
         </Link>
         <button
           type="submit"
           className="text-gray-900 bg-blue-600 border border-gray-300 focus:outline-none hover:bg-blue-800 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:text-white dark:border-gray-600 dark:hover:bg-blue-800 dark:hover:border-gray-600 dark:focus:ring-gray-700"
         >
-          Login
+          Register
         </button>
       </div>
     </form>
   );
 };
 
-export default LoginForm;
+export default RegisterForm;

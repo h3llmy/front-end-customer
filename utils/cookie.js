@@ -1,22 +1,31 @@
 import { fetchApi } from "./fetch";
+import jwtDecode from "jwt-decode";
 
 export const setCookie = (name, token) => {
-  const expirationDate = new Date();
-  expirationDate.setDate(expirationDate.getDate() + 30);
+  try {
+    if (jwtDecode(token)) {
+      const expirationDate = new Date();
+      expirationDate.setDate(expirationDate.getDate() + 30);
 
-  const cookieOptions = {
-    expires: expirationDate.toUTCString(),
-    path: "/",
-  };
+      const cookieOptions = {
+        expires: expirationDate.toUTCString(),
+        path: "/",
+      };
 
-  const encodedCookieValue = encodeURIComponent(token);
-  const cookieString = `${name}=${encodedCookieValue}; ${Object.entries(
-    cookieOptions
-  )
-    .map(([key, value]) => `${key}=${value}`)
-    .join("; ")}`;
+      const encodedCookieValue = encodeURIComponent(token);
+      const cookieString = `${name}=${encodedCookieValue}; ${Object.entries(
+        cookieOptions
+      )
+        .map(([key, value]) => `${key}=${value}`)
+        .join("; ")}`;
 
-  document.cookie = cookieString;
+      document.cookie = cookieString;
+    } else {
+      throw new Error("Unauthorize");
+    }
+  } catch (error) {
+    deleteCookie(name);
+  }
 };
 
 export const getCookie = (name) => {

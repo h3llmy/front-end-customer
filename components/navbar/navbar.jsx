@@ -9,13 +9,17 @@ import Link from "next/link";
 const Navbar = () => {
   const [menuDisplay, setMenuDisplay] = useState(false);
   const [userLogin, setUserLogin] = useState("");
+
   const getUserLogin = async () => {
-    const getUserDetail = await fetchApi.get("/user/detail", {
-      headers: {
-        Authorization: `Bearer ${await getLoginCookie("user")}`,
-      },
-    });
-    setUserLogin(getUserDetail.data.data);
+    const loginToken = await getLoginCookie("user");
+    if (loginToken) {
+      const getUserDetail = await fetchApi.get("/user/detail", {
+        headers: {
+          Authorization: `Bearer ${loginToken}`,
+        },
+      });
+      setUserLogin(getUserDetail.data.data);
+    }
   };
 
   useEffect(() => {
@@ -35,7 +39,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="fixed w-full bg-white border-gray-200 dark:bg-gray-900">
+      <nav className="fixed w-full bg-white border-gray-200 dark:bg-gray-800 z-[50] border-b-2 dark:border-black">
         <div className="w-full flex flex-wrap items-center justify-between mx-auto p-4 px-10">
           <NavbarLogo />
           <div className="flex items-center md:order-2">
@@ -53,11 +57,18 @@ const Navbar = () => {
                 {userLogin?.username}
               </button>
             ) : (
-              <Link href={"/login"}>
-                <button className="flex p-1 font-bold hidden md:block mr-3 text-sm md:mr-0 dark:text-white">
-                  Login
-                </button>
-              </Link>
+              <div className="flex space-x-4">
+                <Link href={"/register"}>
+                  <button className="flex p-1 font-bold hidden md:block mr-3 text-sm md:mr-0 dark:text-white">
+                    Register
+                  </button>
+                </Link>
+                <Link href={"/login"}>
+                  <button className="flex p-1 font-bold hidden md:block mr-3 text-sm md:mr-0 dark:text-white">
+                    Login
+                  </button>
+                </Link>
+              </div>
             )}
             {userLogin && (
               <div className="hidden md:block">
@@ -95,16 +106,16 @@ const Navbar = () => {
               menuDisplay ? "" : "hidden"
             } w-full md:flex md:w-auto md:order-1`}
           >
-            <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-16 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+            <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-16 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-800 dark:border-gray-700">
               <li>
                 <NavbarButton href={"/"} name={"Home"} />
               </li>
               <li>
                 <NavbarButton href={"/product"} name={"Product"} />
               </li>
-              <li>
+              {/* <li>
                 <NavbarButton href={"/contact"} name={"Contact"} />
-              </li>
+              </li> */}
               <li>
                 <NavbarButton href={"/about"} name={"About"} />
               </li>
@@ -127,6 +138,7 @@ const Navbar = () => {
               ) : (
                 <div className="md:hidden">
                   <NavbarButton href={"/login"} name={"Login"} />
+                  <NavbarButton href={"/register"} name={"Register"} />
                 </div>
               )}
             </ul>
