@@ -9,6 +9,23 @@ import Link from "next/link";
 const Navbar = () => {
   const [menuDisplay, setMenuDisplay] = useState(false);
   const [userLogin, setUserLogin] = useState("");
+  const [theme, setTheme] = useState("light");
+
+  useEffect(() => {
+    const storedTheme = localStorage.getItem("theme");
+    if (storedTheme) {
+      setTheme(storedTheme);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   const getUserLogin = async () => {
     const loginToken = await getLoginCookie("user");
@@ -39,7 +56,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="fixed w-full bg-white border-gray-200 dark:bg-gray-800 z-[50] border-b-2 dark:border-black">
+      <nav className="fixed w-full bg-white border-gray-200 dark:bg-gray-800 z-[50] border-b-2 dark:border-black shadow-md">
         <div className="w-full flex flex-wrap items-center justify-between mx-auto p-4 px-10">
           <NavbarLogo />
           <div className="flex items-center md:order-2">

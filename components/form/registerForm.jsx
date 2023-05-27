@@ -44,7 +44,7 @@ const RegisterForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <h1 className="text-4xl text-center mb-5 font-semibold">Register</h1>
-      <div className="mb-6">
+      <div className="mb-2">
         <InputText
           name={"Email"}
           inputValue={(value) => {
@@ -54,7 +54,7 @@ const RegisterForm = () => {
           onError={errorMessage.email}
         />
       </div>
-      <div className="mb-6">
+      <div className="mb-2">
         <InputText
           name={"Username"}
           inputValue={(value) => {
@@ -64,7 +64,7 @@ const RegisterForm = () => {
           onError={errorMessage.username}
         />
       </div>
-      <div className="mb-6">
+      <div className="mb-2">
         <InputPassword
           name={"Password"}
           inputValue={(value) => {
@@ -73,7 +73,7 @@ const RegisterForm = () => {
           onError={errorMessage.password}
         />
       </div>
-      <div className="mb-6">
+      <div className="mb-2">
         <InputPassword
           name={"Confirm Password"}
           inputValue={(value) => {

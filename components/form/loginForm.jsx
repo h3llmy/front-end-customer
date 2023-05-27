@@ -40,7 +40,7 @@ const LoginForm = () => {
   };
   return (
     <form onSubmit={handleSubmit}>
-      <div className="mb-6">
+      <div className="mb-2">
         <h1 className="text-4xl text-center mb-8 font-semibold">Login</h1>
         <InputText
           name={"Username"}
@@ -51,7 +51,7 @@ const LoginForm = () => {
           onError={errorMessage.username}
         />
       </div>
-      <div className="mb-6">
+      <div className="mb-2">
         <InputPassword
           name={"Password"}
           inputValue={(value) => {

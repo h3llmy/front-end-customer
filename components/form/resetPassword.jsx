@@ -43,7 +43,7 @@ const ResetPasswordForm = ({ token }) => {
   };
   return (
     <form onSubmit={handleSubmit}>
-      <div className="mb-6">
+      <div className="mb-2">
         <h1 className="text-4xl text-center mb-8 font-semibold">
           Reset Password
         </h1>
@@ -56,7 +56,7 @@ const ResetPasswordForm = ({ token }) => {
           onError={errorMessage.newPassword}
         />
       </div>
-      <div className="mb-6">
+      <div className="mb-2">
         <InputPassword
           name={"Confirm New Password"}
           inputValue={(value) => {

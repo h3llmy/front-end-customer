@@ -12,7 +12,7 @@ const StickyWhatsappLogo = ({ children }) => {
           src={"whatsapp.png"}
           alt="WhatsApp Logo"
           title="contact us on whatsapp"
-          className="w-14 h-14 shadow-lg"
+          className="w-14 h-14"
         />
       </a>
     </>

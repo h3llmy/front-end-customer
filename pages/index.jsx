@@ -5,7 +5,7 @@ import HomeCategory from "../components/conteiner/homeCategory";
 
 const Home = () => {
   return (
-    <React.Fragment>
+    <>
       <div className="h-[40vh] md:h-[89vh] flex items-center justify-center">
         <div className="absolute top-28 md:top-60 flex left-10 text-5xl font-semibold text-white">
           <div className="flex flex-col">
@@ -22,7 +22,7 @@ const Home = () => {
         </div>
         <img
           className="h-full w-full object-cover z-[10]"
-          src="https://media.discordapp.net/attachments/789054414853636096/1107152800389025853/image.png?width=832&height=468"
+          src={"What_is_Information_Technology.webp"}
           alt=""
         />
       </div>
@@ -30,7 +30,7 @@ const Home = () => {
         <HomeCategory />
       </div>
       <StickyWhatsappLogo />
-    </React.Fragment>
+    </>
   );
 };
 
