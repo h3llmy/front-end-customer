@@ -7,6 +7,7 @@ import errorHanddler from "../utils/errorHanddler";
 import LoadingAnimation from "../components/loading/loadingAnimation";
 import ProductDisplayContainer from "../components/conteiner/productDisplay";
 import Pagination from "../components/pagination/pagination";
+import SearchForm from "../components/form/searchForm";
 
 const Product = () => {
   const [productList, setProductList] = useState();
@@ -16,10 +17,11 @@ const Product = () => {
 
   const fetch = async () => {
     try {
+      setProductList(null);
       const products = await fetchApi.get(
         `/product/list?page=${router.query.page}&limit=20${
           router.query.category ? `&category=${router.query.category}` : ""
-        }`
+        }${router.query.search ? `&search=${router.query.search}` : ""}`
       );
       setProductList(products.data.data);
       setErrorMessage("");
@@ -35,19 +37,28 @@ const Product = () => {
     });
   };
 
+  const handdleSearch = (search) => {
+    router.push({
+      query: { ...router.query, search: search, page: 1 },
+    });
+  };
+
   useEffect(() => {
     if (router.isReady) {
       fetch();
     }
-  }, [router.query.category, router.query.page]);
+  }, [router.query.category, router.query.page, router.query.search]);
 
   return (
     <>
       <Sidebar />
-      <div className="p-4 sm:ml-64">
+      <div className="p-4 ml-64">
+        <div className="pb-5">
+          <SearchForm searchTextCallback={handdleSearch} />
+        </div>
         {productList?.list ? (
           <>
-            <div className="grid grid-cols-5 gap-5">
+            <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
               {productList.list.map((product) => (
                 <ProductDisplayContainer key={product._id} product={product} />
               ))}
@@ -59,8 +70,10 @@ const Product = () => {
         ) : (
           <>
             {errorMessage ? (
-              <div className="text-[#FF0000] font-semibold mb-2">
-                {errorMessage}
+              <div className="h-[70vh] flex justify-center items-center">
+                <div className="text-[#FF0000] font-semibold mb-2">
+                  {errorMessage}
+                </div>
               </div>
             ) : (
               <LoadingAnimation />

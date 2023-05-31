@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 const ProductDisplayContainer = ({ product }) => {
-  const maxLength = 30;
+  const maxLength = 50;
   return (
     <Link href={`/product/${product?._id}`}>
       <div className="rounded-lg overflow-hidden bg-gray-100 hover:cursor-pointer shadow-lg">

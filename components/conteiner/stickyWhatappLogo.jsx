@@ -1,3 +1,6 @@
+import Image from "next/image";
+import whatsappImage from "../../public/whatsapp.png";
+
 const StickyWhatsappLogo = ({ children }) => {
   return (
     <>
@@ -8,11 +11,12 @@ const StickyWhatsappLogo = ({ children }) => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <img
-          src={"whatsapp.png"}
+        <Image
+          src={whatsappImage}
           alt="WhatsApp Logo"
-          title="contact us on whatsapp"
-          className="w-14 h-14"
+          title="Contact us on WhatsApp"
+          width={56}
+          height={56}
         />
       </a>
     </>

@@ -68,7 +68,7 @@ const Navbar = () => {
                 onBlur={() => {
                   setTimeout(() => {
                     setMenuDisplay(false);
-                  }, 100);
+                  }, 200);
                 }}
               >
                 {userLogin?.username}

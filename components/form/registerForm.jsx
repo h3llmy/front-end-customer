@@ -60,7 +60,6 @@ const RegisterForm = () => {
           inputValue={(value) => {
             setUsername(value);
           }}
-          autoFocus
           onError={errorMessage.username}
         />
       </div>

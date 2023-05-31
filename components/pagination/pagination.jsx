@@ -1,28 +1,46 @@
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const Pagination = ({ data, onPageChange }) => {
-  const [currentPage, setCurrentPage] = useState(1);
   const totalPages = data?.totalPages;
+
+  const useCurrentPage = () => {
+    const router = useRouter();
+    const [currentPage, setCurrentPage] = useState(1);
+
+    useEffect(() => {
+      if (router.isReady) {
+        if (Number(router.query.page) <= 0) {
+          router.query.page = 1;
+        }
+        setCurrentPage(Number(router.query.page) || 1);
+      }
+    }, [router.query.page, router.isReady]);
+
+    return currentPage;
+  };
+
+  const currentPage = useCurrentPage();
 
   const handlePreviousClick = () => {
     if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
+      onPageChange(currentPage - 1);
     }
   };
 
   const handleNextClick = () => {
     if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
+      onPageChange(currentPage + 1);
     }
   };
 
   const handlePageClick = (page) => {
-    setCurrentPage(page);
+    onPageChange(page);
   };
 
   useEffect(() => {
     if (totalPages < currentPage) {
-      setCurrentPage(totalPages);
+      onPageChange(totalPages);
     }
   }, [totalPages]);
 
@@ -49,10 +67,6 @@ const Pagination = ({ data, onPageChange }) => {
       </li>
     );
   }
-
-  useEffect(() => {
-    onPageChange(currentPage);
-  }, [currentPage]);
 
   return (
     <nav aria-label="Page navigation example">
