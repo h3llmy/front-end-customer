@@ -25,12 +25,10 @@ const ResetPasswordForm = ({ token }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const [loginToken] = await Promise.all([
-        fetchApi.put(`/auth/reset/password/${token}`, {
-          newPassword,
-          confirmNewPassword,
-        }),
-      ]);
+      const loginToken = await fetchApi.put(`/auth/reset/password/${token}`, {
+        newPassword,
+        confirmNewPassword,
+      });
       setCookie("user", loginToken.data.data.refreshToken);
       if (jwtDecode(loginToken.data.data.accessToken).status === "admin") {
         alert("pasword has ben reset");

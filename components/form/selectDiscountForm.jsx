@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import InputTextArea from "../input/inputTextArea";
 import { fetchApi } from "../../utils/fetch";
 import errorHanddler from "../../utils/errorHanddler";
@@ -7,7 +7,6 @@ import { useRouter } from "next/router";
 
 const SelectDiscountForm = ({ children, productId, discountId }) => {
   const [noteInput, setNoteInput] = useState("");
-  const [paymentResponse, setPaymentResponse] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   const router = useRouter();
@@ -34,18 +33,14 @@ const SelectDiscountForm = ({ children, productId, discountId }) => {
           Authorization: `Bearer ${cookie}`,
         },
       });
-      setPaymentResponse(newOrder.data.data);
+      if (newOrder.data.data.redirect_url) {
+        router.push(newOrder.data.data.redirect_url);
+      }
       setErrorMessage("");
     } catch (error) {
       errorHanddler(error, setErrorMessage);
     }
   };
-
-  useEffect(() => {
-    if (paymentResponse.redirect_url) {
-      window.open(paymentResponse.redirect_url, "_blank");
-    }
-  }, [paymentResponse]);
 
   const handdleNoteValue = (event) => {
     setNoteInput(event);

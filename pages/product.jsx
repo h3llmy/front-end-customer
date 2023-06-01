@@ -69,15 +69,15 @@ const Product = () => {
           </>
         ) : (
           <>
-            {errorMessage ? (
-              <div className="h-[70vh] flex justify-center items-center">
+            <div className="h-[70vh] flex justify-center items-center">
+              {errorMessage ? (
                 <div className="text-[#FF0000] font-semibold mb-2">
                   {errorMessage}
                 </div>
-              </div>
-            ) : (
-              <LoadingAnimation />
-            )}
+              ) : (
+                <LoadingAnimation />
+              )}
+            </div>
           </>
         )}
       </div>

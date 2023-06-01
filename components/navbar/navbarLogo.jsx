@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const NavbarLogo = () => {
   return (
-    <Link href={"/"}>
+    <Link href={"/test"}>
       <a className="flex items-center">
         <img
           src="https://flowbite.com/docs/images/logo.svg"

@@ -28,14 +28,12 @@ const RegisterForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const [registerToken] = await Promise.all([
-        fetchApi.post("/auth/register", {
-          email,
-          username,
-          password,
-          confirmPassword,
-        }),
-      ]);
+      const registerToken = await fetchApi.post("/auth/register", {
+        email,
+        username,
+        password,
+        confirmPassword,
+      });
       router.push(`/verification/${registerToken.data.data.token}`);
     } catch (error) {
       errorHanddler(error, setErrorMessage);

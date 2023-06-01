@@ -48,7 +48,15 @@ const Sidebar = () => {
               ))}
             </>
           ) : (
-            <>{errorMessage ? errorMessage : <LoadingAnimation />}</>
+            <>
+              {errorMessage ? (
+                <div className="text-[#FF0000] font-semibold mb-2">
+                  {errorMessage}
+                </div>
+              ) : (
+                <LoadingAnimation />
+              )}
+            </>
           )}
         </ul>
       </div>
