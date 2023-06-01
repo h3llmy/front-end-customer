@@ -5,6 +5,7 @@ import NavbarMenu from "./navbarMenu";
 import { deleteCookie, getLoginCookie } from "../../utils/cookie";
 import { fetchApi } from "../../utils/fetch";
 import Link from "next/link";
+import errorHanddler from "../../utils/errorHanddler";
 
 const Navbar = () => {
   const [menuDisplay, setMenuDisplay] = useState(false);
@@ -28,14 +29,18 @@ const Navbar = () => {
   }, [theme]);
 
   const getUserLogin = async () => {
-    const loginToken = await getLoginCookie("user");
-    if (loginToken) {
-      const getUserDetail = await fetchApi.get("/user/detail", {
-        headers: {
-          Authorization: `Bearer ${loginToken}`,
-        },
-      });
-      setUserLogin(getUserDetail.data.data);
+    try {
+      const loginToken = await getLoginCookie("user");
+      if (loginToken) {
+        const getUserDetail = await fetchApi.get("/user/detail", {
+          headers: {
+            Authorization: `Bearer ${loginToken}`,
+          },
+        });
+        setUserLogin(getUserDetail.data.data);
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
 

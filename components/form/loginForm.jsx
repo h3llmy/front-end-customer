@@ -14,8 +14,12 @@ const LoginForm = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const checkCooie = async () => {
-    if (await getLoginCookie("user")) {
-      router.push("/");
+    try {
+      if (await getLoginCookie("user")) {
+        router.push("/");
+      }
+    } catch (error) {
+      errorHanddler(error, setErrorMessage);
     }
   };
 

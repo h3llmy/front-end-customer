@@ -3,7 +3,9 @@ import jwtDecode from "jwt-decode";
 
 export const setCookie = (name, token) => {
   try {
-    if (jwtDecode(token)) {
+    const decodeedToken = jwtDecode(token);
+    if (decodeedToken && decodeedToken.status === "user") {
+      console.log("mantap");
       const expirationDate = new Date();
       expirationDate.setDate(expirationDate.getDate() + 30);
 
@@ -25,6 +27,7 @@ export const setCookie = (name, token) => {
     }
   } catch (error) {
     deleteCookie(name);
+    throw error;
   }
 };
 
@@ -46,11 +49,13 @@ export const getLoginCookie = async (name) => {
     if (!myCookie) {
       return null;
     }
-    const [newToken] = await Promise.all([
-      fetchApi.post("/auth/refresh/token", {
-        refreshToken: myCookie,
-      }),
-    ]);
+    const newToken = await fetchApi.post("/auth/refresh/token", {
+      refreshToken: myCookie,
+    });
+    const decodeedToken = jwtDecode(newToken.data.data.refreshToken);
+    if (decodeedToken.status !== "user") {
+      throw new Error("not valid token");
+    }
     setCookie(name, newToken.data.data.refreshToken);
     return newToken.data.data.accessToken;
   } catch (error) {
