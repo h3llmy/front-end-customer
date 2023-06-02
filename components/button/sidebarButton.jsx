@@ -7,9 +7,9 @@ const SidebarButton = ({ href, svg, name, notif, onClick, query, id }) => {
     <Link href={href}>
       <a
         onClick={onClick}
-        className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 ${
+        className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-blue-200 dark:hover:bg-gray-700 ${
           router.query[query] === id
-            ? "bg-gray-200 dark:bg-gray-700 border-2 border-gray-400"
+            ? "bg-blue-200 dark:bg-blue-700 border-2 border-blue-400"
             : ""
         }`}
       >

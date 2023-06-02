@@ -5,7 +5,6 @@ export const setCookie = (name, token) => {
   try {
     const decodeedToken = jwtDecode(token);
     if (decodeedToken && decodeedToken.status === "user") {
-      console.log("mantap");
       const expirationDate = new Date();
       expirationDate.setDate(expirationDate.getDate() + 30);
 

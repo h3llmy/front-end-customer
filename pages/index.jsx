@@ -23,7 +23,7 @@ const Home = () => {
         <img
           className="h-full w-full object-cover z-[10]"
           src={"What_is_Information_Technology.webp"}
-          alt=""
+          alt="index image"
         />
       </div>
       <div className="md:mr-[20vw]">
