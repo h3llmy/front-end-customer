@@ -5,7 +5,6 @@ import NavbarMenu from "./navbarMenu";
 import { deleteCookie, getLoginCookie } from "../../utils/cookie";
 import { fetchApi } from "../../utils/fetch";
 import Link from "next/link";
-import errorHanddler from "../../utils/errorHanddler";
 
 const Navbar = () => {
   const [menuDisplay, setMenuDisplay] = useState(false);
@@ -67,7 +66,7 @@ const Navbar = () => {
           <div className="flex items-center md:order-2">
             {userLogin?.username ? (
               <button
-                className="flex p-1 hidden md:block mr-3 text-md md:mr-0 font-bold dark:text-white"
+                className="flex p-1 md:block mr-3 text-md md:mr-0 font-bold dark:text-white"
                 onFocus={handdleMenuDisplay}
                 onClick={handdleMenuDisplay}
                 onBlur={() => {
@@ -81,12 +80,12 @@ const Navbar = () => {
             ) : (
               <div className="flex space-x-4">
                 <Link href={"/register"}>
-                  <button className="flex p-1 font-bold hidden md:block mr-3 text-sm md:mr-0 dark:text-white">
+                  <button className="flex p-1 font-bold md:block mr-3 text-sm md:mr-0 dark:text-white">
                     Register
                   </button>
                 </Link>
                 <Link href={"/login"}>
-                  <button className="flex p-1 font-bold hidden md:block mr-3 text-sm md:mr-0 dark:text-white">
+                  <button className="flex p-1 font-bold md:block mr-3 text-sm md:mr-0 dark:text-white">
                     Login
                   </button>
                 </Link>
