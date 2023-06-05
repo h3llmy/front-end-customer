@@ -68,35 +68,37 @@ const Pagination = ({ data, onPageChange }) => {
     );
   }
 
-  return (
-    <nav aria-label="Page navigation example">
-      <ul className="inline-flex -space-x-px shadow-md">
-        <li>
-          <button
-            onClick={handlePreviousClick}
-            disabled={currentPage === 1}
-            className={`${
-              currentPage === 1 ? "cursor-not-allowed" : null
-            } px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
-          >
-            Previous
-          </button>
-        </li>
-        {pageButtons}
-        <li>
-          <button
-            onClick={handleNextClick}
-            disabled={currentPage === totalPages}
-            className={`${
-              currentPage === totalPages ? "cursor-not-allowed" : null
-            } px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
-          >
-            Next
-          </button>
-        </li>
-      </ul>
-    </nav>
-  );
+  if (totalPages > 1) {
+    return (
+      <nav aria-label="Page navigation example">
+        <ul className="inline-flex -space-x-px shadow-md">
+          <li>
+            <button
+              onClick={handlePreviousClick}
+              disabled={currentPage === 1}
+              className={`${
+                currentPage === 1 ? "cursor-not-allowed" : null
+              } px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
+            >
+              Previous
+            </button>
+          </li>
+          {pageButtons}
+          <li>
+            <button
+              onClick={handleNextClick}
+              disabled={currentPage === totalPages}
+              className={`${
+                currentPage === totalPages ? "cursor-not-allowed" : null
+              } px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
+            >
+              Next
+            </button>
+          </li>
+        </ul>
+      </nav>
+    );
+  }
 };
 
 export default Pagination;

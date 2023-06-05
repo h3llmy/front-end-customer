@@ -61,9 +61,9 @@ const Detail = () => {
             <p className="w-full flex justify-center font-medium text-3xl pb-5">
               {productDetail?.name}
             </p>
-            <div className="w-full md:flex md:space-x-5">
+            <div className="w-full lg:flex lg:space-x-5">
               {/* product container */}
-              <div className="md:w-3/4 p-5 border-2 border-gray-300 rounded-lg">
+              <div className="lg:w-3/4 p-5 border-2 border-gray-300 rounded-lg">
                 <ProductDetail defaultValue={productDetail?.productUrl} />
                 <h1 className="w-full flex justify-center font-medium text-2xl py-5">
                   Product Description
@@ -74,7 +74,7 @@ const Detail = () => {
                   </pre>
                 </div>
               </div>
-              <div className="md:w-1/4 mt-5 md:mt-0 h-full border-2 border-gray-300 rounded-lg p-3 shadow-md">
+              <div className="lg:w-1/4 mt-5 lg:mt-0 h-full border-2 border-gray-300 rounded-lg p-3 shadow-md">
                 <OrderContainer
                   title={"Order"}
                   productDetail={productDetail}

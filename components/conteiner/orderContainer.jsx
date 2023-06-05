@@ -1,4 +1,5 @@
 import { dateConvert } from "../../utils/dateConvert";
+import { numberWithDots } from "../../utils/numberWithDots";
 
 const OrderContainer = ({
   productDetail,
@@ -7,10 +8,6 @@ const OrderContainer = ({
   displayButton,
   title,
 }) => {
-  const numberWithDots = (number) => {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-  };
-
   const countTotalPrice = () => {
     if (discount) {
       return (

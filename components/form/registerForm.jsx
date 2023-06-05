@@ -77,7 +77,7 @@ const RegisterForm = () => {
             setComfirmPassword(value);
           }}
           onError={
-            errorMessage.comfirmPassword ||
+            errorMessage.confirmPassword ||
             (typeof errorMessage == "string" && errorMessage)
           }
         />

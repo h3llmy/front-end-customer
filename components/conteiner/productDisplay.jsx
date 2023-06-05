@@ -8,10 +8,10 @@ const ProductDisplayContainer = ({ product }) => {
         <img
           src={product?.productUrl[0]}
           alt={product?.name}
-          className="w-full h-40 object-cover"
+          className="w-full h-20 md:h-40 object-cover"
         />
         <div className="w-full flex justify-center p-2">
-          <p className="font-bold">{product?.name}</p>
+          <p className="font-bold text-center">{product?.name}</p>
         </div>
         <div className="text-center">
           <p>

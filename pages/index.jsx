@@ -7,7 +7,7 @@ const Home = () => {
   return (
     <>
       <div className="h-[40vh] md:h-[89vh] flex items-center justify-center">
-        <div className="absolute top-28 md:top-60 flex left-10 text-5xl font-semibold text-white">
+        <div className="absolute items-center flex left-10 text-5xl font-semibold text-white">
           <div className="flex flex-col">
             <div className="text-2xl md:text-5xl text-white z-[20] text-stroke">
               Jasa Penjualan Produk Digital
