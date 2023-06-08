@@ -4,10 +4,10 @@ import { fetchApi } from "../../utils/fetch";
 import errorHanddler from "../../utils/errorHanddler";
 import LoadingAnimation from "../loading/loadingAnimation";
 
-const Sidebar = () => {
+const Sidebar = ({ toggleSidebar }) => {
   const [categoriesList, setCategoriesList] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
-  const [sidebarVisible, setSidebarVisible] = useState(false); // State to track sidebar visibility
+  const [sidebarVisible, setSidebarVisible] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -23,18 +23,12 @@ const Sidebar = () => {
     fetchData();
   }, []);
 
-  const toggleSidebar = () => {
-    setSidebarVisible(!sidebarVisible);
-  };
+  useEffect(() => {
+    setSidebarVisible(!toggleSidebar);
+  }, [toggleSidebar]);
 
   return (
     <div className="relative">
-      <button
-        onClick={toggleSidebar}
-        className="absolute top-0 md:hidden right-0 p-2 m-4 bg-gray-200 rounded-md z-50"
-      >
-        {sidebarVisible ? "Hide" : "Show"}
-      </button>
       <aside
         className={`fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform ${
           sidebarVisible

@@ -1,4 +1,4 @@
-import { getLayout } from "../components/layout/layout";
+import { navbarFooterLayot } from "../components/layout/navbarFooterLayout";
 
 const Collection = () => {
   return (
@@ -8,6 +8,6 @@ const Collection = () => {
   );
 };
 
-Collection.getLayout = getLayout;
+Collection.getLayout = navbarFooterLayot;
 
 export default Collection;

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { getLayout } from "../components/layout/layout";
+import { navbarFooterLayot } from "../components/layout/navbarFooterLayout";
 
 const Test = () => {
   useEffect(() => {
@@ -12,5 +12,5 @@ const Test = () => {
   return <div></div>;
 };
 
-Test.getLayout = getLayout;
+Test.getLayout = navbarFooterLayot;
 export default Test;

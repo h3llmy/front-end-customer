@@ -18,7 +18,7 @@ const Product = () => {
     try {
       setProductList(null);
       const products = await fetchApi.get(
-        `/product/list?page=${router.query.page}&limit=20${
+        `/product/list?page=${router.query.page}&limit=30${
           router.query.category ? `&category=${router.query.category}` : ""
         }${router.query.search ? `&search=${router.query.search}` : ""}`
       );
@@ -56,7 +56,7 @@ const Product = () => {
         </div>
         {productList?.list ? (
           <>
-            <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
+            <div className="grid grid-cols-3 lg:grid-cols-5 gap-5">
               {productList.list.map((product) => (
                 <ProductDisplayContainer key={product._id} product={product} />
               ))}

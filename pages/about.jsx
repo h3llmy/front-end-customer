@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import AboutContainer from "../components/conteiner/aboutContainer";
-import { getLayout } from "../components/layout/layout";
 import { fetchApi } from "../utils/fetch";
 import errorHanddler from "../utils/errorHanddler";
 import ContactUsContainer from "../components/conteiner/contactUsContainer";
 import getConfig from "next/config";
+import { navbarFooterLayot } from "../components/layout/navbarFooterLayout";
 
 const About = () => {
   const [totalUser, setTotalUser] = useState(0);
@@ -113,6 +113,6 @@ const About = () => {
   );
 };
 
-About.getLayout = getLayout;
+About.getLayout = navbarFooterLayot;
 
 export default About;
