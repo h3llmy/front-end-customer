@@ -9,19 +9,22 @@ import SearchForm from "../components/form/searchForm";
 import { navbarFooterSidebarLayot } from "../components/layout/navbarFooterSidebarLayout";
 
 const Product = () => {
-  const [productList, setProductList] = useState();
+  const [productList, setProductList] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
 
   const router = useRouter();
 
-  const fetch = async () => {
+  const fetchProducts = async () => {
     try {
       setProductList(null);
-      const products = await fetchApi.get(
-        `/product/list?page=${router.query.page}&limit=30${
-          router.query.category ? `&category=${router.query.category}` : ""
-        }${router.query.search ? `&search=${router.query.search}` : ""}`
-      );
+      const products = await fetchApi.get(`/product/list`, {
+        params: {
+          page: router.query.page,
+          limit: 30,
+          category: router.query.category,
+          search: router.query.search,
+        },
+      });
       setProductList(products.data.data);
       setErrorMessage("");
     } catch (error) {
@@ -30,21 +33,23 @@ const Product = () => {
     }
   };
 
-  const handdlePagination = (page) => {
+  const handlePagination = (page) => {
     router.push({
-      query: { ...router.query, page: page },
+      pathname: "/product",
+      query: { ...router.query, page },
     });
   };
 
-  const handdleSearch = (search) => {
+  const handleSearch = (search) => {
     router.push({
-      query: { ...router.query, search: search, page: 1 },
+      pathname: "/product",
+      query: { ...router.query, search, page: 1 },
     });
   };
 
   useEffect(() => {
     if (router.isReady) {
-      fetch();
+      fetchProducts();
     }
   }, [router.query.category, router.query.page, router.query.search]);
 
@@ -52,9 +57,9 @@ const Product = () => {
     <>
       <div className="p-4 md:ml-64">
         <div className="pb-5">
-          <SearchForm searchTextCallback={handdleSearch} />
+          <SearchForm searchTextCallback={handleSearch} />
         </div>
-        {productList?.list ? (
+        {productList && productList.list ? (
           <>
             <div className="grid grid-cols-3 lg:grid-cols-5 gap-5">
               {productList.list.map((product) => (
@@ -62,21 +67,19 @@ const Product = () => {
               ))}
             </div>
             <div className="flex justify-center pt-5">
-              <Pagination data={productList} onPageChange={handdlePagination} />
+              <Pagination data={productList} onPageChange={handlePagination} />
             </div>
           </>
         ) : (
-          <>
-            <div className="h-[70vh] flex justify-center items-center">
-              {errorMessage ? (
-                <div className="text-[#FF0000] font-semibold mb-2">
-                  {errorMessage}
-                </div>
-              ) : (
-                <LoadingAnimation />
-              )}
-            </div>
-          </>
+          <div className="h-[70vh] flex justify-center items-center">
+            {errorMessage ? (
+              <div className="text-[#FF0000] font-semibold mb-2">
+                {errorMessage}
+              </div>
+            ) : (
+              <LoadingAnimation />
+            )}
+          </div>
         )}
       </div>
     </>

@@ -4,6 +4,7 @@ import { fetchApi } from "../../utils/fetch";
 import errorHanddler from "../../utils/errorHanddler";
 import { getLoginCookie } from "../../utils/cookie";
 import { useRouter } from "next/router";
+import LoadingAnimation from "../loading/loadingAnimation";
 
 const SelectDiscountForm = ({ children, productId, discountId }) => {
   const [noteInput, setNoteInput] = useState("");
@@ -38,8 +39,10 @@ const SelectDiscountForm = ({ children, productId, discountId }) => {
       if (newOrder.data.data.redirect_url) {
         router.push(newOrder.data.data.redirect_url);
       }
-      setButtonDisabled(false);
-      setErrorMessage("");
+      setTimeout(() => {
+        setButtonDisabled(false);
+        setErrorMessage("");
+      }, 500);
     } catch (error) {
       setButtonDisabled(false);
       errorHanddler(error, setErrorMessage);
@@ -66,7 +69,7 @@ const SelectDiscountForm = ({ children, productId, discountId }) => {
           disabled={buttonDisabled}
           className="w-full bg-blue-500 p-2 font-semibold rounded-lg mt-4 shadow-md"
         >
-          Pay
+          {buttonDisabled ? <LoadingAnimation /> : "Pay"}
         </button>
       </form>
     </>

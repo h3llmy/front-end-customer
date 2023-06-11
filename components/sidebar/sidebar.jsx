@@ -24,7 +24,7 @@ const Sidebar = ({ toggleSidebar }) => {
   }, []);
 
   useEffect(() => {
-    setSidebarVisible(!toggleSidebar);
+    setSidebarVisible(toggleSidebar);
   }, [toggleSidebar]);
 
   return (

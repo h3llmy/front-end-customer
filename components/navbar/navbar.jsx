@@ -43,14 +43,18 @@ const Navbar = ({ setSidebarVisible, sidebarButton }) => {
   };
 
   const handdleSidebarVisible = () => {
-    setSidebarDisplay(!sidebarDisplay);
-    setSidebarVisible(sidebarDisplay);
+    setSidebarDisplay(sidebarDisplay ? false : true);
   };
 
   const a = () => {
     setSidebarDisplay(false);
-    setSidebarVisible(sidebarDisplay);
   };
+
+  useEffect(() => {
+    if (sidebarButton) {
+      setSidebarVisible(sidebarDisplay);
+    }
+  }, [sidebarDisplay]);
 
   return (
     <>

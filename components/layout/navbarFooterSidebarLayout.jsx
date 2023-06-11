@@ -4,7 +4,7 @@ import Navbar from "../navbar/navbar";
 import Sidebar from "../sidebar/sidebar";
 
 export default function NavbarFooterSidebar({ children }) {
-  const [sidebarDisplay, setSidebarDisplay] = useState(true);
+  const [sidebarDisplay, setSidebarDisplay] = useState(false);
   return (
     <>
       <Navbar setSidebarVisible={setSidebarDisplay} sidebarButton={true} />
