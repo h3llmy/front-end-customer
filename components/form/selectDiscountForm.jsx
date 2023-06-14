@@ -4,9 +4,11 @@ import { fetchApi } from "../../utils/fetch";
 import errorHanddler from "../../utils/errorHanddler";
 import { getLoginCookie } from "../../utils/cookie";
 import { useRouter } from "next/router";
+import LoadingAnimation from "../loading/loadingAnimation";
 
 const SelectDiscountForm = ({ children, productId, discountId }) => {
   const [noteInput, setNoteInput] = useState("");
+  const [buttonDisabled, setButtonDisabled] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   const router = useRouter();
@@ -18,6 +20,7 @@ const SelectDiscountForm = ({ children, productId, discountId }) => {
       if (!cookie) {
         router.push("/login");
       }
+      setButtonDisabled(true);
       let payloadOrder = {
         productId: productId,
         note: noteInput,
@@ -36,8 +39,12 @@ const SelectDiscountForm = ({ children, productId, discountId }) => {
       if (newOrder.data.data.redirect_url) {
         router.push(newOrder.data.data.redirect_url);
       }
-      setErrorMessage("");
+      setTimeout(() => {
+        setButtonDisabled(false);
+        setErrorMessage("");
+      }, 500);
     } catch (error) {
+      setButtonDisabled(false);
       errorHanddler(error, setErrorMessage);
     }
   };
@@ -59,9 +66,10 @@ const SelectDiscountForm = ({ children, productId, discountId }) => {
         </div>
         <button
           type="submit"
+          disabled={buttonDisabled}
           className="w-full bg-blue-500 p-2 font-semibold rounded-lg mt-4 shadow-md"
         >
-          Pay
+          {buttonDisabled ? <LoadingAnimation /> : "Pay"}
         </button>
       </form>
     </>

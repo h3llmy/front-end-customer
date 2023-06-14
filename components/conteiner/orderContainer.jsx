@@ -10,9 +10,9 @@ const OrderContainer = ({
 }) => {
   const countTotalPrice = () => {
     if (discount) {
-      return (
+      return Math.round(
         Number(productDetail?.price) -
-        (Number(productDetail?.price) * Number(discount?.percentage)) / 100
+          (Number(productDetail?.price) * Number(discount?.percentage)) / 100
       );
     } else {
       return Number(productDetail?.price);

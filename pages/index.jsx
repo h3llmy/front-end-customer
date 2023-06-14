@@ -1,7 +1,7 @@
 import React from "react";
-import { getLayout } from "../components/layout/layout";
 import StickyWhatsappLogo from "../components/conteiner/stickyWhatappLogo";
 import HomeCategory from "../components/conteiner/homeCategory";
+import { navbarFooterLayot } from "../components/layout/navbarFooterLayout";
 
 const Home = () => {
   return (
@@ -34,6 +34,6 @@ const Home = () => {
   );
 };
 
-Home.getLayout = getLayout;
+Home.getLayout = navbarFooterLayot;
 
 export default Home;

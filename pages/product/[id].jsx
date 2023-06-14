@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import { getLayout } from "../../components/layout/layout";
 import errorHanddler from "../../utils/errorHanddler";
 import { useEffect, useState } from "react";
 import { fetchApi } from "../../utils/fetch";
@@ -8,6 +7,7 @@ import SelectDiscountForm from "../../components/form/selectDiscountForm";
 import ProductDetail from "../../components/conteiner/productDetail";
 import StickyWhatsappLogo from "../../components/conteiner/stickyWhatappLogo";
 import OrderContainer from "../../components/conteiner/orderContainer";
+import { navbarFooterLayot } from "../../components/layout/navbarFooterLayout";
 
 const Detail = () => {
   const router = useRouter();
@@ -62,7 +62,6 @@ const Detail = () => {
               {productDetail?.name}
             </p>
             <div className="w-full lg:flex lg:space-x-5">
-              {/* product container */}
               <div className="lg:w-3/4 p-5 border-2 border-gray-300 rounded-lg">
                 <ProductDetail defaultValue={productDetail?.productUrl} />
                 <h1 className="w-full flex justify-center font-medium text-2xl py-5">
@@ -107,6 +106,6 @@ const Detail = () => {
   );
 };
 
-Detail.getLayout = getLayout;
+Detail.getLayout = navbarFooterLayot;
 
 export default Detail;

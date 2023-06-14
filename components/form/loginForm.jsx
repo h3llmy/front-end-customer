@@ -65,8 +65,8 @@ const LoginForm = () => {
           }
         />
       </div>
-      <div className="flex justify-between">
-        <div className="font-normal text-base px-5 py-2.5 mr-2 mb-2">
+      <div className="lg:flex lg:justify-between">
+        <div className="font-normal text-base px-5 py-2.5 mr-2 mb-2 w-full">
           <Link href={"/forget-password"}>
             <u className="text-blue-500 hover:cursor-pointer">
               forget your password?
@@ -79,12 +79,14 @@ const LoginForm = () => {
             </u>
           </Link>
         </div>
-        <button
-          type="submit"
-          className="text-gray-900 bg-blue-600 border border-gray-300 focus:outline-none hover:bg-blue-800 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:text-white dark:border-gray-600 dark:hover:bg-blue-800 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-        >
-          Login
-        </button>
+        <div className="w-full md:w-fit flex justify-end">
+          <button
+            type="submit"
+            className="text-gray-900 bg-blue-600 border border-gray-300 focus:outline-none hover:bg-blue-800 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:text-white dark:border-gray-600 dark:hover:bg-blue-800 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+          >
+            Login
+          </button>
+        </div>
       </div>
     </form>
   );

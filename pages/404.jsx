@@ -1,9 +1,9 @@
-import { getLayout } from "../components/layout/layout";
+import { navbarFooterLayot } from "../components/layout/navbarFooterLayout";
 
 const NotFound = () => {
   return <div>page Not Found</div>;
 };
 
-NotFound.getLayout = getLayout;
+NotFound.getLayout = navbarFooterLayot;
 
 export default NotFound;
