@@ -102,6 +102,24 @@ const Order = () => {
     setShowModalDetail(true);
   };
 
+  const handdleAccept = async () => {
+    try {
+      const cookie = await getLoginCookie("user");
+      const updateOrderDone = await fetchApi.put(
+        `/order/update/accept/${orderDetail._id}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${cookie}`,
+          },
+        }
+      );
+      setShowModalDetail(false);
+    } catch (error) {
+      errorHanddler(error, setErrorMessage);
+    }
+  };
+
   return (
     <>
       <div className="flex justify-center pt-5">
@@ -155,10 +173,37 @@ const Order = () => {
         >
           {orderDetail ? (
             <>
-              <OrderForm
-                orderDetail={orderDetail}
-                onDecline={() => setShowModalDetail(false)}
-              />
+              <OrderForm orderDetail={orderDetail} />
+              <div className="px-6 py-4 flex justify-end space-x-3 items-center">
+                {Number(orderDetail.maxRevision) -
+                  Number(orderDetail.totalRevision) >
+                  0 &&
+                  orderDetail.orderStatus === "sended" && (
+                    <>
+                      <button
+                        type="button"
+                        className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:shadow-outline-gray"
+                        onClick={handdleAccept}
+                      >
+                        Accept
+                      </button>
+                      <button
+                        type="button"
+                        className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 focus:outline-none focus:shadow-outline-gray"
+                        onClick={() => setShowModalDetail(false)}
+                      >
+                        revision
+                      </button>
+                    </>
+                  )}
+                <button
+                  type="button"
+                  className="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 focus:outline-none focus:shadow-outline-gray"
+                  onClick={() => setShowModalDetail(false)}
+                >
+                  Cancel
+                </button>
+              </div>
             </>
           ) : (
             <LoadingAnimation />

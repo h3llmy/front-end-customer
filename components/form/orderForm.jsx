@@ -1,9 +1,7 @@
 import InputText from "../input/inputText";
 import InputDate from "../input/inputDate";
-import InputNumber from "../input/inputNumber";
 import InputTextArea from "../input/inputTextArea";
 import ProductDetail from "../conteiner/productDetail";
-import ModalFormButton from "../button/modalFormButton";
 
 const OrderForm = ({ orderDetail, onDecline }) => {
   return (
@@ -39,13 +37,13 @@ const OrderForm = ({ orderDetail, onDecline }) => {
           disable={true}
           defaultValue={orderDetail.productCategory}
         />
-        <InputNumber
+        <InputText
           inputValue={() => {}}
           name={"revision opportunity"}
           disable={true}
-          defaultValue={
+          defaultValue={`${
             Number(orderDetail.maxRevision) - Number(orderDetail.totalRevision)
-          }
+          }x`}
         />
         <InputDate
           inputValue={() => {}}
@@ -70,10 +68,13 @@ const OrderForm = ({ orderDetail, onDecline }) => {
       </div>
       {orderDetail?.productPreview && (
         <div className="pt-5">
-          <ProductDetail defaultValue={orderDetail?.productPreview} />
+          <ProductDetail
+            downloadAble={true}
+            name={"Product Preview"}
+            defaultValue={Array(orderDetail?.productPreview)}
+          />
         </div>
       )}
-      <ModalFormButton onDecline={onDecline} />
     </>
   );
 };
