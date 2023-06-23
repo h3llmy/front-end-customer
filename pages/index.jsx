@@ -7,7 +7,7 @@ import HomeCategoryRight from "../components/conteiner/homeCategoryRight";
 const Home = () => {
   const categories = [
     {
-      name: "Website",
+      name: "Category 1",
       imageUrl: "/gmail.webp",
       description: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minima ut
       eveniet dolore assumenda nostrum nihil soluta beatae accusantium
