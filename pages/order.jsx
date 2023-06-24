@@ -78,6 +78,7 @@ const Order = () => {
     router.query.search,
     router.query.datefrom,
     router.query.dateuntil,
+    router.query.order_id,
   ]);
 
   useEffect(() => {
@@ -111,7 +112,6 @@ const Order = () => {
 
   const handdleAccept = async () => {
     try {
-      await fetchOrderList();
       const cookie = await getLoginCookie("user");
       await fetchApi.put(
         `/order/update/accept/${orderDetail._id}`,
@@ -122,6 +122,7 @@ const Order = () => {
           },
         }
       );
+      await fetchOrderList();
       setShowModalDetail(false);
     } catch (error) {
       errorHanddler(error, setErrorMessage);
