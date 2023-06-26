@@ -1,13 +1,18 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { getLoginCookie } from "../../utils/cookie";
 
 const CollectionsDisplayContainer = ({ collection }) => {
   const [productImage, setProductImage] = useState(null);
   const fetchFile = async () => {
     try {
+      const cookie = await getLoginCookie("user");
       const fileName = collection?.productUrl.split(/[/|-]+/).pop();
       const response = await axios.get(collection?.productUrl, {
         responseType: "blob",
+        headers: {
+          Authorization: `Bearer ${cookie}`,
+        },
       });
       const file = new File([response.data], fileName, {
         type: response.data.type,
