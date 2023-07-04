@@ -17,8 +17,16 @@ const ProductDetail = ({ name, defaultValue, process, downloadAble }) => {
   }, [process]);
 
   const fetchFile = async () => {
+    let cookie = await getLoginCookie("user");
+    let config = {};
+
+    if (cookie) {
+      config.headers = {
+        Authorization: `Bearer ${cookie}`,
+      };
+    }
+
     try {
-      const cookie = await getLoginCookie("user");
       if (defaultValue && Array.isArray(defaultValue)) {
         const files = await Promise.all(
           defaultValue.map(async (value) => {
@@ -31,15 +39,15 @@ const ProductDetail = ({ name, defaultValue, process, downloadAble }) => {
                 );
                 setLoadingProgress(percentCompleted);
               },
-              headers: {
-                Authorization: `Bearer ${cookie}`,
-              },
+              ...config,
             });
+
             return new File([response.data], fileName, {
               type: response.data.type,
             });
           })
         );
+
         setSelectedFiles([...files]);
         setCurrentSlide(0);
       }
