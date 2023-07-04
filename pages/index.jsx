@@ -7,7 +7,7 @@ import HomeCategoryRight from "../components/conteiner/homeCategoryRight";
 const Home = () => {
   const categories = [
     {
-      name: "Category 1",
+      name: "Keamanan Terjamin",
       imageUrl: "/gmail.webp",
       description: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minima ut
       eveniet dolore assumenda nostrum nihil soluta beatae accusantium
@@ -22,7 +22,7 @@ const Home = () => {
       `,
     },
     {
-      name: "Category 2",
+      name: "Terpercaya",
       imageUrl: "/gmail.webp",
       description: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minima ut
       eveniet dolore assumenda nostrum nihil soluta beatae accusantium
@@ -37,7 +37,7 @@ const Home = () => {
       `,
     },
     {
-      name: "Category 3",
+      name: "Konsisten",
       imageUrl: "/gmail.webp",
       description: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minima ut
       eveniet dolore assumenda nostrum nihil soluta beatae accusantium
@@ -125,6 +125,9 @@ const Home = () => {
           alt="index image"
         />
       </div>
+      <h3 className="w-full flex justify-center text-center pt-10 font-semibold text-4xl">
+        Kenapa Memilih Kami?
+      </h3>
       {categories.map((category, index) => (
         <div
           id={category.name}
