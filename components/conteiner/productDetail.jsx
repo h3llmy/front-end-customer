@@ -166,7 +166,11 @@ const ProductDetail = ({ name, defaultValue, process, downloadAble }) => {
                       />
                     </audio>
                   ) : file.type.includes("video/") ? (
-                    <video controls controlsList="nodownload">
+                    <video
+                      className="object-contain max-h-full"
+                      controls
+                      controlsList="nodownload"
+                    >
                       <source
                         src={file.url || URL.createObjectURL(file)}
                         type={file.type}
