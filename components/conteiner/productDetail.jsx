@@ -4,6 +4,7 @@ import JSZip from "jszip";
 import ProgressBar from "../loading/progressBar";
 import LoadingAnimation from "../loading/loadingAnimation";
 import errorHanddler from "../../utils/errorHanddler";
+import { getLoginCookie } from "../../utils/cookie";
 
 const ProductDetail = ({ name, defaultValue, process, downloadAble }) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -16,6 +17,15 @@ const ProductDetail = ({ name, defaultValue, process, downloadAble }) => {
   }, [process]);
 
   const fetchFile = async () => {
+    let cookie = await getLoginCookie("user");
+    let config = {};
+
+    if (cookie) {
+      config.headers = {
+        Authorization: `Bearer ${cookie}`,
+      };
+    }
+
     try {
       if (defaultValue && Array.isArray(defaultValue)) {
         const files = await Promise.all(
@@ -29,12 +39,15 @@ const ProductDetail = ({ name, defaultValue, process, downloadAble }) => {
                 );
                 setLoadingProgress(percentCompleted);
               },
+              ...config,
             });
+
             return new File([response.data], fileName, {
               type: response.data.type,
             });
           })
         );
+
         setSelectedFiles([...files]);
         setCurrentSlide(0);
       }

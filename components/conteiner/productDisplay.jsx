@@ -15,7 +15,7 @@ const ProductDisplayContainer = ({ product }) => {
         </div>
         <div className="text-center">
           <p>
-            {product?.descryption.length > maxLength
+            {product?.descryption?.length > maxLength
               ? `${product?.descryption.substring(0, maxLength)}...`
               : product?.descryption || ""}
           </p>

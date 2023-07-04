@@ -8,7 +8,7 @@ const Footer = () => {
         <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400">
           © 2023{" "}
           <Link href={"/"}>
-            <a className="hover:underline">Semua Aplikai Indonesia™</a>
+            <a className="hover:underline">Semua Aplikasi Indonesia™</a>
           </Link>
           . All Rights Reserved.
         </span>

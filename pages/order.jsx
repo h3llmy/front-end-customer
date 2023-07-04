@@ -12,14 +12,17 @@ import Modal from "../components/modal/modal";
 import InputDate from "../components/input/inputDate";
 import ModalFormButton from "../components/button/modalFormButton";
 import OrderForm from "../components/form/orderForm";
+import InputTextArea from "../components/input/inputTextArea";
 
 const Order = () => {
   const [orderList, setOrderList] = useState(null);
   const [orderDetail, setOrderDetail] = useState(null);
   const [filterStart, setFilterStart] = useState(null);
   const [filterUntil, setFilterUntil] = useState(null);
+  const [revisionNote, setRevisionNote] = useState(null);
   const [showModalFilter, setShowModalFilter] = useState(false);
   const [showModalDetail, setShowModalDetail] = useState(false);
+  const [showRevisionForm, setShowRevisionForm] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   const router = useRouter();
@@ -75,7 +78,12 @@ const Order = () => {
     router.query.search,
     router.query.datefrom,
     router.query.dateuntil,
+    router.query.order_id,
   ]);
+
+  useEffect(() => {
+    orderDetail ? setShowRevisionForm(false) : setShowRevisionForm(false);
+  }, [orderDetail]);
 
   const handlePagination = (page) => {
     router.push({
@@ -105,7 +113,7 @@ const Order = () => {
   const handdleAccept = async () => {
     try {
       const cookie = await getLoginCookie("user");
-      const updateOrderDone = await fetchApi.put(
+      await fetchApi.put(
         `/order/update/accept/${orderDetail._id}`,
         {},
         {
@@ -114,9 +122,39 @@ const Order = () => {
           },
         }
       );
+      await fetchOrderList();
       setShowModalDetail(false);
     } catch (error) {
       errorHanddler(error, setErrorMessage);
+    }
+  };
+
+  const postRevision = async () => {
+    try {
+      const cookie = await getLoginCookie("user");
+      await fetchApi.put(
+        `/order/update/revision/${orderDetail._id}`,
+        { revisionNote: revisionNote },
+        {
+          headers: {
+            Authorization: `Bearer ${cookie}`,
+          },
+        }
+      );
+      fetchOrderList();
+      alert("revision sended");
+      setShowModalDetail(false);
+    } catch (error) {
+      errorHanddler(error, setErrorMessage);
+    }
+  };
+
+  const handdleRevision = async () => {
+    if (showRevisionForm) {
+      await fetchOrderList();
+      await postRevision();
+    } else {
+      setShowRevisionForm(true);
     }
   };
 
@@ -124,6 +162,7 @@ const Order = () => {
     <>
       <div className="flex justify-center pt-5">
         <div className="w-[90%] md:w-[80%] max-w-[1400px] flex flex-col gap-4">
+          <h1 className="w-full text-center font-bold text-3xl">Order List</h1>
           <div className="flex w-full justify-between gap-5">
             <button
               onClick={() => setShowModalFilter(true)}
@@ -173,7 +212,19 @@ const Order = () => {
         >
           {orderDetail ? (
             <>
-              <OrderForm orderDetail={orderDetail} />
+              {showRevisionForm ? (
+                <InputTextArea
+                  name={"Revision Note"}
+                  autoFocus={true}
+                  onError={
+                    errorMessage?.revisionNote ||
+                    (typeof errorMessage === "string" && errorMessage)
+                  }
+                  inputValue={setRevisionNote}
+                />
+              ) : (
+                <OrderForm orderDetail={orderDetail} />
+              )}
               <div className="px-6 py-4 flex justify-end space-x-3 items-center">
                 {Number(orderDetail.maxRevision) -
                   Number(orderDetail.totalRevision) >
@@ -190,7 +241,7 @@ const Order = () => {
                       <button
                         type="button"
                         className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 focus:outline-none focus:shadow-outline-gray"
-                        onClick={() => setShowModalDetail(false)}
+                        onClick={handdleRevision}
                       >
                         revision
                       </button>
