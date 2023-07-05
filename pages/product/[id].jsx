@@ -45,13 +45,15 @@ const Detail = () => {
   useEffect(() => {
     if (router.isReady) {
       fetch();
-      fetchDiscount();
+      if (Object.keys(productDetail).length > 0) {
+        fetchDiscount();
+      }
     }
   }, [router.query.id]);
 
   return (
     <>
-      {errorMessage === "product" ? (
+      {errorMessage.includes("Product") || errorMessage == "_id" ? (
         <div className="text-[#FF0000] font-semibold mb-2 flex justify-center items-center h-screen">
           product not found
         </div>
