@@ -154,7 +154,7 @@ const ProductDetail = ({ name, defaultValue, process, downloadAble }) => {
                 >
                   {file.type.includes("image/") ? (
                     <img
-                      className="object-contain max-h-full"
+                      className="object-contain h-full"
                       src={file.url || URL.createObjectURL(file)}
                       alt={file.name}
                     />
@@ -167,7 +167,7 @@ const ProductDetail = ({ name, defaultValue, process, downloadAble }) => {
                     </audio>
                   ) : file.type.includes("video/") ? (
                     <video
-                      className="object-contain max-h-full"
+                      className="object-contain h-full"
                       controls
                       controlsList="nodownload"
                     >
