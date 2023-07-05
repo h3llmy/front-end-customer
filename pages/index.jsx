@@ -52,7 +52,7 @@ const Home = () => {
       `,
     },
     {
-      name: "Category 4",
+      name: "Berkualitas",
       imageUrl: "/gmail.webp",
       description: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minima ut
       eveniet dolore assumenda nostrum nihil soluta beatae accusantium

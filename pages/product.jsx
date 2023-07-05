@@ -6,7 +6,8 @@ import LoadingAnimation from "../components/loading/loadingAnimation";
 import ProductDisplayContainer from "../components/conteiner/productDisplay";
 import Pagination from "../components/pagination/pagination";
 import SearchForm from "../components/form/searchForm";
-import { navbarFooterSidebarLayot } from "../components/layout/navbarFooterSidebarLayout";
+import { navbarFooterLayot } from "../components/layout/navbarFooterLayout";
+import Sidebar from "../components/sidebar/sidebar";
 
 const Product = () => {
   const [productList, setProductList] = useState(null);
@@ -82,10 +83,11 @@ const Product = () => {
           </div>
         )}
       </div>
+      <Sidebar />
     </>
   );
 };
 
-Product.getLayout = navbarFooterSidebarLayot;
+Product.getLayout = navbarFooterLayot;
 
 export default Product;
