@@ -42,13 +42,17 @@ const Detail = () => {
     setShowModal(showModal ? false : true);
   };
 
-  useEffect(() => {
+  const fetchAll = async () => {
     if (router.isReady) {
-      fetch();
+      await fetch();
       if (Object.keys(productDetail).length > 0) {
         fetchDiscount();
       }
     }
+  };
+
+  useEffect(() => {
+    fetchAll();
   }, [router.query.id]);
 
   return (
