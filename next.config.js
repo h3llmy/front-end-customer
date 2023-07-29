@@ -13,7 +13,7 @@ const nextConfig = {
     return [
       {
         // matching all API routes
-        source: "/(.*)",
+        source: "https://0d17-101-128-98-60.ngrok-free.app/(.*)",
         headers: [
           { key: "Access-Control-Allow-Credentials", value: "true" },
           { key: "Access-Control-Allow-Origin", value: "*" },
