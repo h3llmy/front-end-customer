@@ -7,7 +7,6 @@ import ProductDisplayContainer from "../components/conteiner/productDisplay";
 import Pagination from "../components/pagination/pagination";
 import SearchForm from "../components/form/searchForm";
 import { navbarFooterLayot } from "../components/layout/navbarFooterLayout";
-import Sidebar from "../components/sidebar/sidebar";
 
 const Product = () => {
   const [productList, setProductList] = useState(null);
@@ -83,7 +82,6 @@ const Product = () => {
           </div>
         )}
       </div>
-      <Sidebar />
     </>
   );
 };
