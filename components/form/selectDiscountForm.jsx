@@ -37,8 +37,7 @@ const SelectDiscountForm = ({ children, productId, discountId }) => {
         },
       });
       if (newOrder.data.data.redirect_url) {
-        // router.push(newOrder.data.data.redirect_url);
-        console.log(newOrder.data.data.redirect_url);
+        router.push(newOrder.data.data.redirect_url);
       }
       setTimeout(() => {
         setButtonDisabled(false);
