@@ -9,6 +9,26 @@ const nextConfig = {
     EMAIL_ADDRESS: process.env.EMAIL_ADDRESS,
     INSTAGRAM_URL: process.env.INSTAGRAM_URL,
   },
+  async headers() {
+    return [
+      {
+        // matching all API routes
+        source: "/(.*)",
+        headers: [
+          { key: "Access-Control-Allow-Credentials", value: "true" },
+          { key: "Access-Control-Allow-Origin", value: "*" },
+          {
+            key: "Access-Control-Allow-Methods",
+            value: "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+          },
+          {
+            key: "Access-Control-Allow-Headers",
+            value: "*",
+          },
+        ],
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;
