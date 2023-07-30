@@ -9,6 +9,5 @@ export const fetchApi = axios.create({
   headers: {
     "Content-Type": "application/json",
     "Content-Type": "multipart/form-data",
-    "Access-Control-Allow-Headers": "*",
   },
 });
