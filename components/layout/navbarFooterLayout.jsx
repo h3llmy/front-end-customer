@@ -15,9 +15,6 @@ export default function NavbarFooter({ children }) {
       ? setSidebarButtonDisplay(true)
       : setSidebarButtonDisplay(false);
   }, [router.pathname]);
-  useEffect(() => {
-    console.log(sidebarDisplay);
-  }, [sidebarDisplay]);
   return (
     <>
       <Navbar
