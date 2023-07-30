@@ -9,5 +9,6 @@ export const fetchApi = axios.create({
   headers: {
     "Content-Type": "application/json",
     "Content-Type": "multipart/form-data",
+    "ngrok-skip-browser-warning": "any",
   },
 });
