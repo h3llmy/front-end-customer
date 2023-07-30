@@ -15,6 +15,9 @@ export default function NavbarFooter({ children }) {
       ? setSidebarButtonDisplay(true)
       : setSidebarButtonDisplay(false);
   }, [router.pathname]);
+  useEffect(() => {
+    console.log(sidebarDisplay);
+  }, [sidebarDisplay]);
   return (
     <>
       <Navbar
@@ -22,7 +25,9 @@ export default function NavbarFooter({ children }) {
         setSidebarVisible={setSidebarDisplay}
       />
       <div className="pt-[64px] min-h-screen">{children}</div>
-      <Sidebar toggleSidebar={sidebarDisplay} />
+      {router.pathname === "/product" && (
+        <Sidebar toggleSidebar={sidebarDisplay} />
+      )}
       <Footer />
     </>
   );
