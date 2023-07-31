@@ -7,11 +7,15 @@ const ProductDisplayContainer = ({ product }) => {
       <div className="rounded-lg overflow-hidden bg-gray-100 hover:cursor-pointer shadow-lg">
         <img
           src={product?.productUrl[0]}
-          alt={product?.name}
+          alt={String(product?.name).replace(/\b\w/g, (char) =>
+            char.toUpperCase()
+          )}
           className="w-full h-28 sm:h-40 object-cover"
         />
         <div className="w-full flex justify-center p-2">
-          <p className="font-bold text-center">{product?.name}</p>
+          <p className="font-bold text-center">
+            {product?.name.replace(/\b\w/g, (char) => char.toUpperCase())}
+          </p>
         </div>
         <div className="text-center">
           <p>

@@ -64,7 +64,9 @@ const Detail = () => {
         <>
           <div className="p-5">
             <p className="w-full flex justify-center font-medium text-3xl pb-5">
-              {productDetail?.name}
+              {String(productDetail?.name).replace(/\b\w/g, (char) =>
+                char.toUpperCase()
+              )}
             </p>
             <div className="w-full lg:flex lg:space-x-5">
               <div className="lg:w-3/4 p-5 border-2 border-gray-300 rounded-lg">

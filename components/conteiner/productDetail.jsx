@@ -99,7 +99,7 @@ const ProductDetail = ({ name, defaultValue, process, downloadAble }) => {
     <div>
       {name && (
         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-          {name}
+          {String(name).replace(/\b\w/g, (char) => char.toUpperCase())}
         </label>
       )}
       <div className="relative w-full">
