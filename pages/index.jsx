@@ -8,62 +8,51 @@ const Home = () => {
   const categories = [
     {
       name: "Keamanan Terjamin",
-      imageUrl: "/gmail.webp",
-      description: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minima ut
-      eveniet dolore assumenda nostrum nihil soluta beatae accusantium
-      molestiae harum, voluptatum eius illum molestias, a animi cupiditate nam
-      consequatur quod. Lorem ipsum dolor, sit amet consectetur adipisicing
-      elit. Minima ut eveniet dolore assumenda nostrum nihil soluta beatae
-      accusantium molestiae harum, voluptatum eius illum molestias, a animi
-      cupiditate nam consequatur quod. Lorem ipsum dolor, sit amet consectetur
-      adipisicing elit. Minima ut eveniet dolore assumenda nostrum nihil
-      soluta beatae accusantium molestiae harum, voluptatum eius illum
-      molestias, a animi cupiditate nam consequatur quod.
+      imageUrl: "/keamanan.jpg",
+      description: `Keamanan digital merujuk pada praktik-praktik dan teknologi-teknologi 
+      yang dirancang untuk melindungi informasi, data, dan sistem komputer dari ancaman dan 
+      serangan yang mungkin timbul di dunia maya. Ini mencakup langkah-langkah seperti enkripsi 
+      data, otentikasi dua faktor, pemantauan jaringan, perangkat lunak antivirus, dan kebijakan akses yang ketat. 
+      Tujuan utamanya adalah untuk menjaga kerahasiaan, integritas, dan ketersediaan informasi, 
+      serta mencegah perusakan atau penyalahgunaan oleh pihak-pihak yang tidak sah. 
+      Keamanan digital menjadi semakin penting seiring dengan peningkatan ketergantungan terhadap 
+      teknologi digital dalam berbagai aspek kehidupan, termasuk bisnis, pemerintahan, dan komunikasi pribadi.
       `,
     },
     {
       name: "Terpercaya",
-      imageUrl: "/gmail.webp",
-      description: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minima ut
-      eveniet dolore assumenda nostrum nihil soluta beatae accusantium
-      molestiae harum, voluptatum eius illum molestias, a animi cupiditate nam
-      consequatur quod. Lorem ipsum dolor, sit amet consectetur adipisicing
-      elit. Minima ut eveniet dolore assumenda nostrum nihil soluta beatae
-      accusantium molestiae harum, voluptatum eius illum molestias, a animi
-      cupiditate nam consequatur quod. Lorem ipsum dolor, sit amet consectetur
-      adipisicing elit. Minima ut eveniet dolore assumenda nostrum nihil
-      soluta beatae accusantium molestiae harum, voluptatum eius illum
-      molestias, a animi cupiditate nam consequatur quod.
+      imageUrl: "/kepercayaan.jpg",
+      description: `PT Semua Aplikasi Indonesia adalah perusahaan terkemuka 
+      dalam pengembangan solusi aplikasi digital inovatif. Dengan tim berpengalaman, 
+      perusahaan ini berfokus pada menciptakan solusi yang relevan dengan berbagai industri, 
+      mendukung transformasi digital, dan membangun hubungan yang saling menguntungkan dengan klien dan mitra bisnis.
       `,
     },
     {
       name: "Konsisten",
-      imageUrl: "/gmail.webp",
-      description: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minima ut
-      eveniet dolore assumenda nostrum nihil soluta beatae accusantium
-      molestiae harum, voluptatum eius illum molestias, a animi cupiditate nam
-      consequatur quod. Lorem ipsum dolor, sit amet consectetur adipisicing
-      elit. Minima ut eveniet dolore assumenda nostrum nihil soluta beatae
-      accusantium molestiae harum, voluptatum eius illum molestias, a animi
-      cupiditate nam consequatur quod. Lorem ipsum dolor, sit amet consectetur
-      adipisicing elit. Minima ut eveniet dolore assumenda nostrum nihil
-      soluta beatae accusantium molestiae harum, voluptatum eius illum
-      molestias, a animi cupiditate nam consequatur quod.
+      imageUrl: "/konsisten.webp",
+      description: `Keberhasilan PT Semua Aplikasi Indonesia dalam mempertahankan kualitas 
+      produk digitalnya adalah hasil dari konsistensi yang kuat dalam pendekatan pengembangan. 
+      Perusahaan ini secara terus-menerus mengutamakan inovasi, keamanan, dan kinerja optimal 
+      dalam setiap solusi yang dihasilkan. Melalui pengawasan ketat dan proses pengujian yang 
+      teliti, PT Semua Aplikasi Indonesia menjaga reputasi sebagai penyedia produk digital yang 
+      handal dan memenuhi standar kualitas tertinggi. Dengan komitmen untuk terus meningkatkan 
+      dan menghadirkan produk-produk yang relevan dengan perkembangan teknologi, perusahaan ini 
+      berhasil membangun kepercayaan dan loyalitas pelanggan serta mengukuhkan posisinya di industri aplikasi digital.
       `,
     },
     {
       name: "Berkualitas",
-      imageUrl: "/gmail.webp",
-      description: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minima ut
-      eveniet dolore assumenda nostrum nihil soluta beatae accusantium
-      molestiae harum, voluptatum eius illum molestias, a animi cupiditate nam
-      consequatur quod. Lorem ipsum dolor, sit amet consectetur adipisicing
-      elit. Minima ut eveniet dolore assumenda nostrum nihil soluta beatae
-      accusantium molestiae harum, voluptatum eius illum molestias, a animi
-      cupiditate nam consequatur quod. Lorem ipsum dolor, sit amet consectetur
-      adipisicing elit. Minima ut eveniet dolore assumenda nostrum nihil
-      soluta beatae accusantium molestiae harum, voluptatum eius illum
-      molestias, a animi cupiditate nam consequatur quod.
+      imageUrl: "/berkualitas.png",
+      description: `Produk digital yang dihasilkan oleh PT Semua Aplikasi Indonesia 
+      adalah cerminan dari dedikasi mereka terhadap kualitas yang unggul. 
+      Dengan menggabungkan desain intuitif, fungsionalitas yang canggih, dan performa yang handal, 
+      setiap produk digital mencerminkan standar tertinggi dalam pengembangan. 
+      Proses pengembangan yang teliti dan penerapan praktik terbaik dalam industri memastikan 
+      bahwa produk-produk tersebut tidak hanya memenuhi harapan pelanggan, tetapi juga memimpin 
+      dalam inovasi dan memberikan pengalaman yang luar biasa. Keberhasilan PT Semua Aplikasi 
+      Indonesia dalam menghasilkan produk digital berkualitas telah membantu membangun reputasi 
+      mereka sebagai pemimpin dalam industri aplikasi digital.
       `,
     },
   ];
@@ -151,7 +140,6 @@ const Home = () => {
           )}
         </div>
       ))}
-
       <StickyWhatsappLogo />
     </>
   );
